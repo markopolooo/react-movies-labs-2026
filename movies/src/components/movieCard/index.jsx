@@ -15,6 +15,18 @@ import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png'
 import { Link } from "react-router";
 import Avatar from '@mui/material/Avatar';
+import { styled } from "@mui/material/styles";
+
+const StyledCard = styled(Card)({
+  background: "linear-gradient(145deg, #1a1a2e, #16213e)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: "12px",
+  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+  "&:hover": {
+    transform: "translateY(-6px)",
+    boxShadow: "0 12px 30px rgba(100, 60, 255, 0.4)",
+  },
+});
 
 export default function MovieCard({ movie, action }) {
   const { favorites, addToFavorites } = useContext(MoviesContext);
@@ -26,7 +38,7 @@ export default function MovieCard({ movie, action }) {
 
 
   return (
-    <Card>
+    <StyledCard>
             <CardHeader
         avatar={
           isFavorite ? (
@@ -36,7 +48,7 @@ export default function MovieCard({ movie, action }) {
           ) : null
         }
         title={
-          <Typography variant="h5" component="p">
+          <Typography variant="h6" component="p" sx={{ color: "#fff", fontWeight: 700 }}>
             {movie.title}{" "}
           </Typography>
         }
@@ -53,13 +65,13 @@ export default function MovieCard({ movie, action }) {
       <CardContent>
         <Grid container>
           <Grid size={{xs: 6}}>
-            <Typography variant="h6" component="p">
+            <Typography variant="h6" component="p" sx={{ color: "rgba(255,255,255,0.7)" }}>
               <CalendarIcon fontSize="small" />
               {movie.release_date}
             </Typography>
           </Grid>
           <Grid size={{xs: 6}}>
-            <Typography variant="h6" component="p">
+            <Typography variant="h6" component="p" sx={{ color: "rgba(255,255,255,0.7)" }}>
               <StarRateIcon fontSize="small" />
               {"  "} {movie.vote_average}{" "}
             </Typography>
@@ -71,13 +83,20 @@ export default function MovieCard({ movie, action }) {
         {action(movie)}
       
         <Link to={`/movies/${movie.id}`}>
-          <Button variant="outlined" size="medium" color="primary">
+          <Button variant="outlined" size="medium" sx={{
+    borderColor: "#c084fc",
+    color: "#c084fc",
+    "&:hover": {
+      borderColor: "#818cf8",
+      background: "rgba(192,132,252,0.1)",
+    },
+  }}>
             More Info ...
           </Button>
         </Link>
         
       </CardActions>
 
-    </Card>
+    </StyledCard>
   );
 }

@@ -11,9 +11,28 @@ import { useNavigate } from "react-router";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import MovieIcon from "@mui/icons-material/Movie";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
+const StyledAppBar = styled(AppBar)({
+  background: "linear-gradient(135deg, #0f0c29, #302b63, #24243e)",
+  boxShadow: "0 4px 20px rgba(100, 60, 255, 0.4)",
+  borderBottom: "1px solid rgba(255,255,255,0.08)",
+});
 
+const NavButton = styled(Button)({
+  color: "#fff",
+  fontSize: "0.8rem",
+  letterSpacing: "0.1em",
+  textTransform: "uppercase",
+  borderRadius: "20px",
+  transition: "all 0.3s ease",
+  "&:hover": {
+    background: "rgba(255,255,255,0.1)",
+    boxShadow: "0 0 12px rgba(150, 100, 255, 0.6)",
+    color: "#c084fc",
+  },
+});
 const SiteHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -43,12 +62,22 @@ const SiteHeader = () => {
 
   return (
     <>
-      <AppBar position="fixed" color="secondary">
+      <StyledAppBar position="fixed">
         <Toolbar>
-          <Typography variant="h4" sx={{ flexGrow: 1 }}>
+            <MovieIcon sx={{ mr: 1, color: "#c084fc" }} />
+          <Typography variant="h4" sx={{ flexGrow: 1,
+  fontWeight: 800,
+  letterSpacing: "0.15em",
+  textTransform: "uppercase",
+  background: "linear-gradient(90deg, #c084fc, #818cf8)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent", }}>
             TMDB Client
           </Typography>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" sx={{flexGrow: 1,
+  color: "rgba(255,255,255,0.45)",
+  letterSpacing: "0.05em",
+  fontStyle: "italic",}}>
             All you ever wanted to know about Movies!
           </Typography>
             {isMobile ? (
@@ -90,18 +119,18 @@ const SiteHeader = () => {
             ) : (
               <>
                 {menuOptions.map((opt) => (
-                  <Button
+                  <NavButton
                     key={opt.label}
                     color="inherit"
                     onClick={() => handleMenuSelect(opt.path)}
                   >
                     {opt.label}
-                  </Button>
+                  </NavButton>
                 ))}
               </>
             )}
         </Toolbar>
-      </AppBar>
+      </StyledAppBar>
       <Offset />
     </>
   );
