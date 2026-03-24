@@ -67,8 +67,7 @@ export default function FilterMoviesCard(props) {
       }} 
       variant="outlined">
       <CardContent>
-        <Typography variant="h5" component="h1"color="white
-        ">
+        <Typography variant="h5" component="h1"color="white">
           <SearchIcon fontSize="large" />
           Filter the movies.
         </Typography>
