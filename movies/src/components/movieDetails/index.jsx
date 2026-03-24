@@ -9,7 +9,15 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
-
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Avatar from "@mui/material/Avatar";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
 
 
 const root = {
@@ -22,7 +30,7 @@ const root = {
 };
 const chip = { margin: 0.5 };
 
-const MovieDetails = ({ movie }) => {
+const MovieDetails = ({ movie, cast }) => {
 const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
@@ -70,6 +78,34 @@ const [drawerOpen, setDrawerOpen] = useState(false);
   ))}
 
       </Paper>
+      <Accordion sx={{ background: "linear-gradient(145deg, #1a1a2e, #16213e)", border: "1px solid rgba(255,255,255,0.08)", marginTop: 2 }}>
+  <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: "#c084fc" }} />}>
+    <Typography sx={{ color: "#c084fc", fontWeight: 700, letterSpacing: "0.1em" }}>
+      Cast
+    </Typography>
+  </AccordionSummary>
+  <AccordionDetails>
+    <List>
+      {cast && cast.slice(0, 10).map((member) => (
+        <ListItem key={member.cast_id}>
+          <ListItemAvatar>
+            <Avatar
+              src={
+                member.profile_path
+                  ? `https://image.tmdb.org/t/p/w200/${member.profile_path}`
+                  : null
+              }
+            />
+          </ListItemAvatar>
+          <ListItemText
+            primary={<Typography sx={{ color: "#fff" }}>{member.name}</Typography>}
+            secondary={<Typography sx={{ color: "rgba(255,255,255,0.5)" }}>{member.character}</Typography>}
+          />
+        </ListItem>
+      ))}
+    </List>
+  </AccordionDetails>
+</Accordion>
             <Fab
         color="secondary"
         variant="extended"

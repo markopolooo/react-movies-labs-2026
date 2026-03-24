@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from 'react-router';
 import MovieDetails from "../components/movieDetails/";
 import PageTemplate from "../components/templateMoviePage";
-import { getMovie, getMovieRecommendations } from '../api/tmdb-api';
+import { getMovie, getMovieRecommendations, getMovieCast } from '../api/tmdb-api';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../components/spinner';
 import MovieList from "../components/movieList";
@@ -21,6 +21,11 @@ const MoviePage = (props) => {
     queryFn: getMovieRecommendations,
   });
 
+  const { data: cast } = useQuery({
+  queryKey: ['cast', { id: id }],
+  queryFn: getMovieCast,
+});
+
   if (isPending) {
     return <Spinner />;
   }
@@ -35,7 +40,7 @@ const MoviePage = (props) => {
       {movie ? (
         <>
           <PageTemplate movie={movie}>
-            <MovieDetails movie={movie} />
+            <MovieDetails movie={movie} cast={cast} />
           </PageTemplate>
           {recommendations && recommendations.length > 0 && (
             <Grid container sx={{ padding: '20px' }}>
