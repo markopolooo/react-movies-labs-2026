@@ -18,6 +18,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
+import { Link } from "react-router";
 
 
 const root = {
@@ -87,7 +88,7 @@ const [drawerOpen, setDrawerOpen] = useState(false);
   <AccordionDetails>
     <List>
       {cast && cast.slice(0, 10).map((member) => (
-        <ListItem key={member.cast_id}>
+        <ListItem key={member.cast_id} component={Link} to={`/person/${member.id}`} sx={{ textDecoration: "none", "&:hover": { background: "rgba(192,132,252,0.1)", borderRadius: "8px" } }}>
           <ListItemAvatar>
             <Avatar
               src={
