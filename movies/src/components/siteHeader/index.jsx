@@ -12,6 +12,9 @@ import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import MovieIcon from "@mui/icons-material/Movie";
+import Badge from "@mui/material/Badge";
+import { useContext } from "react";
+import { MoviesContext } from "../../contexts/moviesContext";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 const StyledAppBar = styled(AppBar)({
@@ -42,10 +45,12 @@ const SiteHeader = () => {
   
   const navigate = useNavigate();
 
+  const { favorites, mustWatch } = useContext(MoviesContext);
+
  const menuOptions = [
   { label: "Home", path: "/" },
-  { label: "Favorites", path: "/movies/favorites" },
-    { label: "Must Watch", path: "/movies/mustwatch" },
+  { label: "Favorites", path: "/movies/favorites", badge: favorites.length },
+    { label: "Must Watch", path: "/movies/mustwatch", badge: mustWatch.length },
   { label: "Upcoming", path: "/movies/upcoming" },
   { label: "Popular", path: "/movies/popular" },
   { label: "Top Rated", path: "/movies/top-rated" },
@@ -125,7 +130,18 @@ const SiteHeader = () => {
                     color="inherit"
                     onClick={() => handleMenuSelect(opt.path)}
                   >
+                    <Badge
+      badgeContent={opt.badge}
+      color="error"
+      sx={{
+        "& .MuiBadge-badge": {
+          backgroundColor: "#c084fc",
+          color: "#fff",
+        }
+      }}
+    >
                     {opt.label}
+                    </Badge>
                   </NavButton>
                 ))}
               </>
