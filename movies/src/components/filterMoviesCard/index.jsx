@@ -14,7 +14,7 @@ import React, {}  from "react";
 import { getGenres } from "../../api/tmdb-api";
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../spinner';
-
+import Slider from "@mui/material/Slider";
 
 const formControl = 
   {
@@ -53,6 +53,10 @@ export default function FilterMoviesCard(props) {
 
   const handleGenreChange = (e) => {
     handleChange(e, "genre", e.target.value);
+  };
+
+  const handleRatingChange = (e, value) => {
+    handleChange(e, "rating", value);
   };
 
 
@@ -100,6 +104,26 @@ export default function FilterMoviesCard(props) {
             })}
           </Select>
         </FormControl>
+
+<Typography sx={{ color: "white", marginTop: 2 }}>
+  Minimum Rating: {props.ratingFilter}
+</Typography>
+<Slider
+  value={props.ratingFilter}
+  onChange={handleRatingChange}
+  min={0}
+  max={10}
+  step={0.5}
+  marks
+  valueLabelDisplay="auto"
+  sx={{
+    width: "90%",
+    margin: "0 auto",
+    display: "block",
+    color: "#c084fc",
+  }}
+/>
+
       </CardContent>
       <CardMedia
         sx={{ height: 300 }}
