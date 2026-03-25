@@ -16,6 +16,8 @@ import TopRatedMoviesPage from "./pages/topRatedMoviesPage";
 import NowPlayingMoviesPage from "./pages/nowPlayingMoviesPage";
 import MustWatchPage from "./pages/mustWatchPage";
 import PersonDetailsPage from "./pages/personDetailsPage";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
   
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,9 +29,36 @@ const queryClient = new QueryClient({
   },
 });
 
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#c084fc",
+    },
+    secondary: {
+      main: "#818cf8",
+    },
+    background: {
+      default: "#0f0c29",
+      paper: "#1a1a2e",
+    },
+    text: {
+      primary: "#ffffff",
+      secondary: "rgba(255,255,255,0.7)",
+    },
+  },
+  typography: {
+    fontFamily: "'Segoe UI', sans-serif",
+    h1: { fontWeight: 800 },
+    h2: { fontWeight: 700 },
+    h3: { fontWeight: 700 },
+  },
+});
 
 const App = () => {
   return (
+    <ThemeProvider theme={theme}>
+    <CssBaseline />
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <MoviesContextProvider>
@@ -54,6 +83,7 @@ const App = () => {
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
+    </ThemeProvider>
   );
 };
 
