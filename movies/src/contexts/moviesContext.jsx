@@ -16,6 +16,7 @@ const MoviesContextProvider = (props) => {
       newFavorites = [...favorites];
     }
     setFavorites(newFavorites)
+    console.log("New Favorite: ", newFavorites);
   };
   
   // We will use this function in the next step
