@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getPopularActors } from "../api/tmdb-api";
+import PageTemplate from '../components/templateMovieListPage';
 import Spinner from "../components/spinner";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -32,6 +33,14 @@ const ActorsPage = () => {
   if (isError) return <h1>{error.message}</h1>;
 
   return (
+<>
+     <PageTemplate
+      title="Actors"
+      movies={[]}
+      action={(movie) => <AddToFavoritesIcon movie={movie} />}
+    />
+
+
     <Box sx={{ padding: "20px" }}>
       <Typography
         variant="h4"
@@ -76,6 +85,7 @@ const ActorsPage = () => {
         ))}
       </Grid>
     </Box>
+    </>
   );
 };
 

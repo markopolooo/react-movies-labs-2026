@@ -15,8 +15,9 @@ import MovieIcon from "@mui/icons-material/Movie";
 import Badge from "@mui/material/Badge";
 import { useContext } from "react";
 import { MoviesContext } from "../../contexts/moviesContext";
+import { Link } from "react-router";
 
-const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
+//const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 const StyledAppBar = styled(AppBar)({
   background: "linear-gradient(135deg, #0f0c29, #302b63, #24243e)",
   boxShadow: "0 4px 20px rgba(100, 60, 255, 0.4)",
@@ -50,7 +51,7 @@ const SiteHeader = () => {
  const menuOptions = [
   { label: "Home", path: "/" },
   { label: "Favorites", path: "/movies/favorites", badge: favorites.length },
-    { label: "Must Watch", path: "/movies/mustwatch", badge: mustWatch.length },
+  { label: "Must Watch", path: "/movies/mustwatch", badge: mustWatch.length },
   { label: "Upcoming", path: "/movies/upcoming" },
   { label: "Popular", path: "/movies/popular" },
   { label: "Top Rated", path: "/movies/top-rated" },
@@ -69,9 +70,10 @@ const SiteHeader = () => {
 
   return (
     <>
-      <StyledAppBar position="fixed">
+      <StyledAppBar position="sticky" >
         <Toolbar>
-            <MovieIcon sx={{ mr: 1, color: "#c084fc" }} />
+            <MovieIcon sx={{ mr: 1, fontSize: "5rem", color: "#c084fc" }} />
+          <Link to="/homePage.jsx" style={{ textDecoration: 'none', color: 'inherit' }}>
           <Typography variant="h4" sx={{ flexGrow: 1,
   fontWeight: 800,
   letterSpacing: "0.15em",
@@ -81,6 +83,7 @@ const SiteHeader = () => {
   WebkitTextFillColor: "transparent", }}>
             TMDB Client
           </Typography>
+          </Link>
           <Typography variant="h6" sx={{flexGrow: 1,
   color: "rgba(255,255,255,0.45)",
   letterSpacing: "0.05em",
@@ -149,7 +152,7 @@ const SiteHeader = () => {
             )}
         </Toolbar>
       </StyledAppBar>
-      <Offset />
+    {/* <Offset /> */}
     </>
   );
 };
